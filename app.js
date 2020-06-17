@@ -106,3 +106,44 @@ console.log(persona11);
 
 
 //--------------------- FUNCIONES FLECHA ----------------------
+
+//es lo mismo
+var miFuncion2 = function(valor) { return valor; }
+let miFuncion1 = valor => valor;
+
+var sumar2 = function(num1, num2) { return num1 + num2; }
+let sumar1 = (num1, num2) => num1 + num2;
+
+var saludar2 = function() { return "Hola mundo"; }
+let saludar1 = () => "Hola mundo";
+
+//Funciones anonimas
+
+var saludo1 = function(nombre) {
+    return "Hola " + nombre;
+}("Manuel");
+
+var saludo2 = (nombre => `Hola ${nombre}`)("Melissa");
+
+console.log(saludo1, saludo2);
+
+//Ejemplo practico de utilizar this
+
+//tenemos que utilizar bind para hacer referencia con this al propio objeto
+//con la funcion arrow ahorramos codigo y es mas util porque el this ya hace referencia al objeto
+//las funciones flecha no tienen constructor por lo cual no se puede instanciar con new, ni se pueden utilizar sus paremetros con arguments
+var manejador = {
+    id: "123",
+    init: function() {
+        document.addEventListener("click", event => this.clickEnPagina(event.type));
+
+        // document.addEventListener("click", (function(event) {
+        //     this.clickEnPagina(event.type);
+        // }).bind(this), false);
+    },
+    clickEnPagina: function(type) {
+        console.log("Maneja " + type + " para el id: " + this.id);
+    }
+};
+
+manejador.init();
