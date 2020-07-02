@@ -147,3 +147,127 @@ var manejador = {
 };
 
 manejador.init();
+
+//--------------- OBJETOS -----------------
+
+var persona = {
+    nombre: "Fernando",
+    getNombre() {
+        console.log(this.nombre);
+    }
+};
+
+persona.getNombre();
+
+//-------------------------- OBJECT.IS ---------------------
+
+console.log(+0 == -0);
+console.log(+0 === -0);
+//compara literalmente objetos u otro valor
+console.log(Object.is(+0, -0));
+
+//------------------------- OBJECT.ASSIGN --------------------------
+
+//funcion (forma antigua) para fusionar objectos
+function mezclar(objReceptor, objDonador) {
+    Object.keys(objDonador).forEach(function(key) {
+        objReceptor[key] = objDonador[key];
+    });
+
+    return objReceptor;
+}
+
+var objReceptor = {};
+var objDonador = { nombre: "mi-archivo.js" };
+
+console.log(mezclar(objReceptor, objDonador));
+
+//nueva forma
+console.log(Object.assign(objDonador, objDonador));
+
+
+//---------------------------------------------------------
+
+//cambiar propiedades de un prototipo/objeto con setPrototypeOf
+var gato = {
+    sonido() {
+        console.log("Miau!");
+    },
+    chillido() {
+        console.log("MIAU!!!!");
+    }
+};
+
+let perro = {
+    sonido() {
+        console.log("Guau!!!");
+    }
+};
+
+let angora = Object.create(gato);
+console.log(Object.getPrototypeOf(angora) === true); //true
+
+angora.sonido(); //Miau!
+
+Object.setPrototypeOf(angora, perro);
+
+angora.sonido(); //Guau!
+
+//-------------- DESTRUCTURACION DE OBJETOS ------------------
+
+let ajustes = {
+    nombree: "Manuel Jimenez Molina",
+    email: "correo@correo.com",
+    direccion: "direcion 17",
+    premium: true,
+    google: "correogoogle@google.es",
+    curso: {
+        linea: 7,
+        columna: 17,
+        clase: {
+            linea: 10,
+            columna: 9
+        }
+    }
+}
+
+let { nombree: nombre1 = "inicializacion_nombre", email, premium: dePago } = ajustes;
+
+console.log(nombre1, email, dePago);
+
+//-------------- DESTRUCTURACION DE OBJETOS ANIDADOS ------------------
+
+let { curso: { clase: { linea: l_ultimaClase, columna: c_ultimaClase } } } = ajustes;
+
+console.log(l_ultimaClase, c_ultimaClase);
+
+//-------------- DESCTRUCTURACION DE ARRAYS -------------------
+
+let frutas = ["pera", "melocoton", "uva", ["manzana", "piña"]];
+
+let [fruta1, fruta2] = frutas;
+let [, , fruta3] = frutas;
+//cada coma representa un elemento del array
+console.log(fruta1, fruta2, fruta3);
+
+let a = 1;
+let b = 2;
+
+//a y b obtiene el valor del primer y segundo elemento del array que es (b -> 2, a -> 1)
+[a, b] = [b, a]
+console.log(a, b); //2,1
+
+let [, , , [, piña]] = frutas;
+let [primeraFruta, ...demasFrutas] = frutas;
+
+console.log(piña)
+console.log(primeraFruta, demasFrutas);
+
+//--------------- DESTRUCTURACION EN FUNCIONES -----------------
+
+//inicializamos el objeto por si no le pasamos dicho dato
+function crearJugador(nickname, { hp, sp, clase } = { hp: 100, sp: 50, clase: "mago" }) {
+    console.log(nickname, hp, sp, clase);
+}
+
+crearJugador("Manuel");
