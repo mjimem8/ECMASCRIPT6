@@ -271,3 +271,60 @@ function crearJugador(nickname, { hp, sp, clase } = { hp: 100, sp: 50, clase: "m
 }
 
 crearJugador("Manuel");
+
+//------------------ SIMBOLOS -----------------------------
+
+//los simbolos es un dato primitivo que es imposible que su valor es unico
+//los simbolos no es un String
+let primerNombre = Symbol();
+let segundoNombre = Symbol();
+
+let persona3 = {
+    [segundoNombre]: 'Herrera'
+};
+
+persona3[primerNombre] = 'Fernando';
+
+console.log(persona3[primerNombre], persona3[segundoNombre]);
+
+
+// for se utiliza para llamar el mismo simbolo con un alias para que pueda 
+//ser utilizado varias veces
+
+let userID = Symbol.for("userID");
+let objeto = {};
+
+objeto[userID] = "12345";
+console.log(objeto[userID], userID); //12345, userID
+
+let userID2 = Symbol.for("userID");
+console.log(objeto[userID2]); //12345
+
+let id = Symbol.for("id unico");
+console.log(Symbol.keyFor(id)); //id unico
+
+
+//------------------------------ RECORRER OBJETO CON SIMBOLOS ---------------------
+
+let idd = Symbol.for("id");
+let activo = Symbol.for("activo");
+
+//con corchetes podemos meter un dato como clave de propiedad
+let persona4 = {
+    [idd]: "123",
+    [activo]: true,
+    ["codigo"]: "XY123",
+    nombre: "Manuel",
+    apellido: "Jimenez",
+    edad: 24
+};
+
+console.log(Object.keys(persona4));
+
+//con esta propiedad obtenemos los key symbols de un objeto
+let simbolos = Object.getOwnPropertySymbols(persona4);
+console.log(simbolos);
+
+for (i in simbolos) {
+    console.log(simbolos[i], Symbol.keyFor(simbolos[i]), persona4[simbolos[i]]);
+}
