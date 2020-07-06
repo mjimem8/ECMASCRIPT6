@@ -328,3 +328,33 @@ console.log(simbolos);
 for (i in simbolos) {
     console.log(simbolos[i], Symbol.keyFor(simbolos[i]), persona4[simbolos[i]]);
 }
+
+
+//---------------------- SET ---------------------------
+//Son una lista ordenada de valores sin duplicados de cualquier tipo (alternativa al array)
+
+let items = new Set(); //{}
+// let items = new Set([1,2,3,4,5,5,5,6]);
+
+items.add(10);
+items.add("10");
+items.add(11);
+items.add(12);
+items.add(13);
+items.add(13);
+
+console.log(items.has(10)); //true
+console.log(items, items.size); //{10, "10", 11, 12, 13}, 6
+items.delete(3); //Elimina el elemento 3
+
+// items.clear(); Borra todos los elementos
+
+items.forEach(function(valor, llave, numeros) {
+    console.log(valor, llave, numeros);
+    //valor y llave son iguales
+});
+
+let arrayNumeros = [...items];
+console.log(arrayNumeros);
+
+//WeakSet() -> Es como un set() pero con la diferencia que solo se almacenan objetos
