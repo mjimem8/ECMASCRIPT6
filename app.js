@@ -358,3 +358,42 @@ let arrayNumeros = [...items];
 console.log(arrayNumeros);
 
 //WeakSet() -> Es como un set() pero con la diferencia que solo se almacenan objetos
+
+//----------------------------- MAP -------------------------
+
+let mapa = new Map();
+
+mapa.set("nombre", "Fernando");
+mapa.set("edad", 31);
+mapa.set({}, { nombre: "Nombre Apellidos" });
+
+mapa.delete("edad");
+//mapa.get("edad");
+// mapa.has("edad"); true
+
+console.log("mapa ", mapa);
+
+// ----------------------- INCIALIZAR MAPA -------------------
+
+let mapa1 = new Map([
+    ["nombre", "Fernando"],
+    ["edad", 31]
+]);
+
+console.log("mapa1 ", mapa1);
+
+// ---------------------- FOREACH MAP --------------------------
+
+mapa1.forEach(function(valor, llave, mapaOrigen) {
+    console.log("foreach", llave, valor, mapaOrigen);
+});
+
+// --------------------- CLASES DE FOR -----------------------
+
+for (let i in numeros) {
+    console.log("numero ", numeros[i]);
+}
+
+for (let numero of numeros) {
+    console.log("numero-of ", numero);
+}
