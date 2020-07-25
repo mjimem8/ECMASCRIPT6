@@ -397,3 +397,38 @@ for (let i in numeros) {
 for (let numero of numeros) {
     console.log("numero-of ", numero);
 }
+
+
+// --------------- CLASES ---------------------
+
+let nombreMetodo = "gritarNombre";
+class Persona {
+
+    constructor(nombre) {
+        this.nombre = nombre;
+    }
+
+    decirNombre() {
+        console.log(this.nombre);
+    }
+
+    //metodo computados
+    [nombreMetodo]() {
+        console.log(this.nombre.toUpperCase());
+    }
+
+    //los metodos estaticos son metodos no re requieren anteriormente ningun tipo
+    // de propiedad de la clase
+    //solo funcionan cuando el objeto no está inicializado
+    static crear(nombre) {
+        return new Persona(nombre);
+    }
+}
+
+//Si hay herencia y en el hijo ponemos una funcion que se llame igual que la del padre 
+//se va a ejecutar la funcion del hijo
+//Ademas podemos utilizar la funcion del padre desde el hijo con super.funcion()
+
+let yo = Persona.crear("Manuel Jimenez");
+
+console.log("clase persona", yo);
